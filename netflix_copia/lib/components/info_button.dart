@@ -7,12 +7,12 @@ class InfoButton extends StatelessWidget {
   final TextStyle? labelStyle;
 
   const InfoButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     required this.textField,
     this.labelStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +21,34 @@ class InfoButton extends StatelessWidget {
       children: [
         Text(label, style: labelStyle ?? const TextStyle(color: Colors.white)),
 
-        const SizedBox(height: 4),
+        const SizedBox(height: 6),
 
         Row(
           children: [
             Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
+              width: 40,
+              height: 40,
+              decoration: const BoxDecoration(
+                color: Color(0xFFDCDCDC),
+                borderRadius: BorderRadius.horizontal(
+                  left: Radius.circular(5),
+                ),
               ),
               child: Center(child: icon),
             ),
 
-            const SizedBox(width: 8),
+            const SizedBox(width: 2),
 
             Expanded(
               child: Container(
-                height: 48,
-                decoration: BoxDecoration(
+                height: 40,
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.horizontal(
+                    right: Radius.circular(5),
+                  ),
                 ),
-                child: textField,
+                child: Center(child: textField),
               ),
             ),
           ],

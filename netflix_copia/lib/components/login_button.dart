@@ -4,14 +4,13 @@ class LoginButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
 
-  const LoginButton({Key? key, required this.label, this.onPressed})
-    : super(key: key);
+  const LoginButton({super.key, required this.label, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 48,
+      height: 44,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
