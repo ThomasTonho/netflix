@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_copia/components/info_button.dart';
 import 'package:netflix_copia/components/login_button.dart';
+import 'package:netflix_copia/pages/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TelaIncial extends StatefulWidget {
   const TelaIncial({super.key});
@@ -10,6 +12,21 @@ class TelaIncial extends StatefulWidget {
 }
 
 class _TelaIncialState extends State<TelaIncial> {
+  TextEditingController email = TextEditingController();
+  TextEditingController senha = TextEditingController();
+
+  void SalvarDados() async {
+    dynamic banco = await SharedPreferences.getInstance();
+    await banco.setString("email", email.text);
+
+    if (!mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const TelaHome()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,10 +71,14 @@ class _TelaIncialState extends State<TelaIncial> {
                         color: Colors.black54,
                         size: 18,
                       ),
-                      textField: const TextField(
+                      textField: TextField(
+                        controller: email,
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: Colors.black, fontSize: 14),
-                        decoration: InputDecoration(
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(
@@ -81,10 +102,14 @@ class _TelaIncialState extends State<TelaIncial> {
                         color: Colors.black54,
                         size: 18,
                       ),
-                      textField: const TextField(
+                      textField: TextField(
+                        controller: senha,
                         obscureText: true,
-                        style: TextStyle(color: Colors.black, fontSize: 14),
-                        decoration: InputDecoration(
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(
@@ -97,7 +122,7 @@ class _TelaIncialState extends State<TelaIncial> {
 
                     const SizedBox(height: 22),
 
-                    LoginButton(label: 'Entrar', onPressed: () {}),
+                    LoginButton(label: 'Entrar', onPressed: SalvarDados),
 
                     const SizedBox(height: 48),
 
